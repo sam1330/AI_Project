@@ -1,0 +1,3 @@
+src/Constans.py
+src/__pycache__/*
+.env
