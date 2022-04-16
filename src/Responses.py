@@ -3,7 +3,7 @@ from datetime import datetime
 def sample_responses(input_text):
   user_message = input_text.lower()
 
-  if user_message in ['hi', 'hello', 'hey']:
+  if user_message in ['hola', 'buenas', 'buenas tardes, buenos dias', 'saludos']:
     return 'Hello!'
 
   if user_message in ['how are you', "how's it going", 'how are you doing']:

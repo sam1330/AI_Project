@@ -1,0 +1,69 @@
+{
+  "intents": [
+    {
+      "tag": "saludos",
+      "patterns": [
+        "hola",
+        "buenos dias",
+        "buenas tardes",
+        "buenas noches",
+        "saludos"
+      ],
+      "responses": [
+        "Hola ¿en que te puedo ayudar?"
+      ]
+    },
+    {
+      "tag": "despedidas",
+      "patterns": [
+        "adios",
+        "hasta luego",
+        "hasta pronto",
+        "gracias",
+        "gracias por utilizar mi servicio"
+      ],
+      "responses": [
+        "Hasta pronto",
+        "Nos vemos pronto",
+        "Espero que te hayas encontrado de utilidad"
+      ]
+    },
+    {
+      "tag": "preguntas",
+      "patterns": [
+        "necesito un producto",
+        "tienen disponible?",
+        "cuanto cuesta?",
+        "cuanto tiempo tarda en llegar?"
+      ],
+      "responses": []
+    },
+    {
+      "tag": "gratitud",
+      "patterns": [
+        "gracias",
+        "gracias por la informacion"
+      ],
+      "responses": [
+        "De nada",
+        "De nada, gracias",
+        "un gusto",
+        "un placer"
+      ]
+    },
+    {
+      "tag": "horas",
+      "patterns": [
+        "cual es su horario?",
+        "hasta que hora estan abiertos?",
+        "hora de apertura",
+        "hora de cierre"
+      ],
+      "responses": [
+        "Estamos abiertos de lunes a viernes de 9:00 a 6:00",
+        "Cerrado los domingos y festivos",
+        "la hora de apertura es 9 am y la hora de cierre es 6 pm"
+      ]
+    }  
+  ]
+}
