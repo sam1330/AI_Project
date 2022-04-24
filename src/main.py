@@ -29,18 +29,27 @@ def handle_message(update, context):
     output = model(X)
     _, predicted = torch.max(output, dim=1)
     tag = tags[predicted.item()]
-
+    print(tag)
     probs = torch.softmax(output, dim=1)
     prob = probs[0][predicted.item()]
-    if prob.item() > 0.75:
+    print(prob.item())
+    if prob.item() > 0.50:
+        #ideas para el futuro
+        # ya se mas o menos lo que hare, pues implementare respuestas personalizadas para las preguntas abiertas y para preguntas relacionadas con el inventario voy a hacer procesos para responder de manera certera.
         for intent in intents['intents']:
             if tag == intent["tag"]:
+                print(intent)
                 # response = Resp.sample_responses(user_message)
+                update.message.reply_text(random.choice(intent['responses']))
+    else:
+        for intent in intents['intents']:
+            if intent["tag"] == "noanswer":
                 update.message.reply_text(random.choice(intent['responses']))
 
 def errors(update, context):
     """Log Errors caused by Updates.""" 
-    logger.warning('Update "%s" caused error "%s"', update, context.error)
+    print('Update "{}" caused error "{}"'.format(update, context.error))
+    # logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

@@ -1,26 +1,30 @@
 {
   "intents": [
     {
-      "tag": "saludos",
+      "tag": "greetings",
       "patterns": [
         "hola",
         "buenos dias",
         "buenas tardes",
         "buenas noches",
-        "saludos"
+        "buenas",
+        "saludos",
+        "hey"
       ],
       "responses": [
-        "Hola ¿en que te puedo ayudar?"
+        "Hola ¿en que te puedo ayudar?",
+        "Saludos, que necesitas?",
+        "Hola, En que puedo servirle?"
       ]
     },
     {
-      "tag": "despedidas",
+      "tag": "waveout",
       "patterns": [
         "adios",
         "hasta luego",
         "hasta pronto",
-        "gracias",
-        "gracias por utilizar mi servicio"
+        "gracias por utilizar mi servicio",
+        "bye"
       ],
       "responses": [
         "Hasta pronto",
@@ -29,17 +33,17 @@
       ]
     },
     {
-      "tag": "preguntas",
+      "tag": "questions",
       "patterns": [
         "necesito un producto",
         "tienen disponible?",
         "cuanto cuesta?",
         "cuanto tiempo tarda en llegar?"
       ],
-      "responses": []
+      "responses": ["que producto necesitas?", "cual es el producto que necesitas?", "que necesitas?"]
     },
     {
-      "tag": "gratitud",
+      "tag": "thanking",
       "patterns": [
         "gracias",
         "gracias por la informacion"
@@ -52,7 +56,7 @@
       ]
     },
     {
-      "tag": "horas",
+      "tag": "schedule",
       "patterns": [
         "cual es su horario?",
         "hasta que hora estan abiertos?",
@@ -64,6 +68,22 @@
         "Cerrado los domingos y festivos",
         "la hora de apertura es 9 am y la hora de cierre es 6 pm"
       ]
-    }  
+    },{
+      "tag": "noanswer",
+        "patterns": [],
+        "responses": ["Perdon, No puedo entenderte", "Por favor dame mas informacion", "No logro entenderte, por favor dame mas informacion", "No poseo esa informacion"],
+        "context": [""]
+    }, {
+      "tag": "inventory",
+        "patterns": ["necesito un producto", "tienen disponible?", "cuanto cuesta?"],
+        "responses": ["Cual producto desea", "Nombre del producto?", "Que necesita?"],
+        "context": [""]
+    },
+    {
+      "tag": "tracking",
+      "patterns":["cuanto tiempo tarda en llegar?", "que tiempo toma?", "cuanto dura?", "* tarda el envio?"],
+      "responses": ["Deme un momento para consultar", "permitame unos minutos y le aviso", "un momento por favor"],
+      "context": [""]
+    }
   ]
 }

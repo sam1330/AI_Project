@@ -1,6 +1,7 @@
 import numpy as np
 import nltk
 # nltk.download('punkt')
+from nltk.stem import WordNetLemmatizer
 from nltk.stem.porter import PorterStemmer
 stemmer = PorterStemmer()
 
@@ -21,6 +22,17 @@ def stem(word):
     -> ["organ", "organ", "organ"]
     """
     return stemmer.stem(word.lower())
+
+def lemm(word):
+    """
+    stemming = find the root form of the word
+    examples:
+    words = ["organize", "organizes", "organizing"]
+    words = [stem(w) for w in words]
+    -> ["organ", "organ", "organ"]
+    """
+    lemmatizer = WordNetLemmatizer()
+    return lemmatizer.lemmatize(word.lower())
 
 
 def bag_of_words(tokenized_sentence, words):
