@@ -21,14 +21,14 @@ for intent in intents['intents']:
     # add to tag list
     tags.append(tag)
     for pattern in intent['patterns']:
-        # tokenize each word in the sentence
+        # Aqui hacemos el proceso de tokenizacion de palabras
         w = tokenize(pattern)
-        # add to our words list
+        # Aqui agregamos las palabras a una lista
         all_words.extend(w)
-        # add to xy pair
+        # 
         xy.append((w, tag))
 
-# stem and lower each word
+# lemm and lower each word
 ignore_words = ['?', '.', '!', ',', ':', ';', '(', ')', '[', ']', '{', '}']
 all_words = [lemm(w) for w in all_words if w not in ignore_words]
 # remove duplicates and sort

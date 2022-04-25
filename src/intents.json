@@ -5,9 +5,9 @@
       "patterns": [
         "hola",
         "buenos dias",
-        "buenas tardes",
-        "buenas noches",
+        "tardes",
         "buenas",
+        "noches",
         "saludos",
         "hey"
       ],
@@ -22,7 +22,6 @@
       "patterns": [
         "adios",
         "hasta luego",
-        "hasta pronto",
         "gracias por utilizar mi servicio",
         "bye"
       ],
@@ -35,7 +34,7 @@
     {
       "tag": "questions",
       "patterns": [
-        "necesito un producto",
+        "necesito producto",
         "tienen disponible?",
         "cuanto cuesta?",
         "cuanto tiempo tarda en llegar?"
@@ -46,7 +45,7 @@
       "tag": "thanking",
       "patterns": [
         "gracias",
-        "gracias por la informacion"
+        "gracias por informacion"
       ],
       "responses": [
         "De nada",
@@ -71,11 +70,11 @@
     },{
       "tag": "noanswer",
         "patterns": [],
-        "responses": ["Perdon, No puedo entenderte", "Por favor dame mas informacion", "No logro entenderte, por favor dame mas informacion", "No poseo esa informacion"],
+        "responses": ["Esto es lo que puedo hacer por usted:\n 1-Consultar productos\n 2-Estado es un pedido\n 3-Sugerir producto"],
         "context": [""]
     }, {
       "tag": "inventory",
-        "patterns": ["necesito un producto", "tienen disponible?", "cuanto cuesta?"],
+        "patterns": ["necesito un producto", "tienen disponible?", "cuanto cuesta?", "consultar producto"],
         "responses": ["Cual producto desea", "Nombre del producto?", "Que necesita?"],
         "context": [""]
     },
