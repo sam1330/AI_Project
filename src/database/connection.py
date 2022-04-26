@@ -1,5 +1,5 @@
 import mysql.connector
-
+# Esta es la clase que utilizamos para conectarnos a la base de datos. 
 class Connector:
     def __init__(self):
         self.connection = mysql.connector.connect(

@@ -1,7 +1,7 @@
 from database.connection import Connector
 from telegram.ext import *
 
-class ProductRequests:
+class DBRequests:
     def getProductByName(self, name):
         query = "SELECT * FROM products WHERE name LIKE %s"
         data = (name,)
@@ -12,6 +12,13 @@ class ProductRequests:
     def getProductsByCategory(self, category):
         query = "SELECT * FROM products WHERE category LIKE %s"
         data = (category,)
+        db = Connector()
+        db.execute(query, data)
+        return db.fetch()
+    
+    def getProductById(self, client_id):
+        query = "SELECT * FROM products WHERE id = %s"
+        data = (client_id,)
         db = Connector()
         db.execute(query, data)
         return db.fetch()
@@ -44,7 +51,3 @@ class ProductRequests:
             update.message.reply_text("¿Cuántos deseas?")
             endConversation = True
 
-def executeQuery():
-    productRequest = ProductRequests(1, 1)
-    product = productRequest.getProduct("cereal")
-    print(product)

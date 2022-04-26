@@ -10,8 +10,8 @@ from telegram.ext import (
 )
 
 # Define Options
-CHOOSING, CLASS_STATE, SME_DETAILS, CHOOSE_PREF, \
-    SME_CAT, ADD_PRODUCTS, SHOW_STOCKS, POST_VIEW_PRODUCTS = range(8)
+CHOOSING, CLASS_STATE, PAY_STATE, CHECKOUT, \
+    INVENTORY, ADD_PRODUCTS, SHOW_STOCKS, LOCATION = range(8)
 
 
 from telegram.ext import *
@@ -22,7 +22,7 @@ import torch
 from model import NeuralNet
 from nltk_utils import bag_of_words, tokenize
 
-from ProductRequests import *
+from DBRequests import *
 import Constans as keys
 import Responses as Resp
 import handlers
@@ -47,7 +47,7 @@ def handle_message(update, context: CallbackContext) -> int:
     chat_id = update.message.chat.id
     user_message = update.message.text
     user_message = tokenize(user_message)
-
+    # print(update)
         
     X = bag_of_words(user_message, all_words)
     X = X.reshape(1, X.shape[0])
@@ -58,16 +58,17 @@ def handle_message(update, context: CallbackContext) -> int:
     tag = tags[predicted.item()]
     probs = torch.softmax(output, dim=1)
     prob = probs[0][predicted.item()]
-    # print(prob.item())
+
     if prob.item() > 0.65:
         #ideas para el futuro
         # ya se mas o menos lo que hare, pues implementare respuestas personalizadas para las preguntas abiertas y para preguntas relacionadas con el inventario voy a hacer procesos para responder de manera certera.
         for intent in intents['intents']:
             if tag == intent["tag"]:
                 if tag == "inventory":
-                    bot.send_message(chat_id=chat_id, text="Hola, para comenzar escribe tu nombre, email y telefono en ese orden y separado por comas (,)")
-                    return CHOOSING
-                    # ProductRequests = ProductRequests(1, 1)
+                    bot.send_message(chat_id=chat_id, text="Para acceder a los productos escriba tu nombre, email y telefono en ese orden y separado por comas (,)")
+                    # handlers.handleMesages(update, context)
+                    return INVENTORY
+                    # DBRequests = DBRequests(1, 1)
                 bot.send_message(chat_id=chat_id, text=random.choice(intent['responses']))
     else:
         for intent in intents['intents']:
@@ -123,6 +124,11 @@ def main():
         states={
             handlers.CHOOSING: [
                 MessageHandler(
+                    Filters.text, handle_message
+                )
+            ],
+            handlers.INVENTORY: [
+                MessageHandler(
                     Filters.all, handlers.handleMesages
                 )
             ],
@@ -134,13 +140,23 @@ def main():
             ],
             handlers.ADD_PRODUCTS: [
                 CallbackQueryHandler(handlers.addProductToCart)
-            ]
+            ],
+            handlers.CHECKOUT: [
+                CallbackQueryHandler(handlers.checkOut)
+            ],
+            handlers.PAY_STATE: [
+                CallbackQueryHandler(handlers.pay)
+            ],
+            handlers.LOCATION: [
+                MessageHandler(Filters.location, handlers.location)
+                # CallbackQueryHandler(handlers.checkOut)
+            ],
         },
         fallbacks=[CommandHandler('cancel', handlers.cancel)],
         allow_reentry=True
     )
     dp.add_handler(conv_handler)
-    updater.start_polling()
+    updater.start_polling(2)
     updater.idle()
 
 if __name__ == '__main__':

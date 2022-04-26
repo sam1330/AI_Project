@@ -32,16 +32,6 @@
       ]
     },
     {
-      "tag": "questions",
-      "patterns": [
-        "necesito producto",
-        "tienen disponible?",
-        "cuanto cuesta?",
-        "cuanto tiempo tarda en llegar?"
-      ],
-      "responses": ["que producto necesitas?", "cual es el producto que necesitas?", "que necesitas?"]
-    },
-    {
       "tag": "thanking",
       "patterns": [
         "gracias",
@@ -74,8 +64,8 @@
         "context": [""]
     }, {
       "tag": "inventory",
-        "patterns": ["necesito un producto", "tienen disponible?", "cuanto cuesta?", "consultar producto"],
-        "responses": ["Cual producto desea", "Nombre del producto?", "Que necesita?"],
+        "patterns": ["necesito un producto", "tienen disponible?", "cuanto cuesta?", "consultar producto", "consultar un producto", "producto", "productos"],
+        "responses": ["Cual producto desea", "Nombre del producto?"],
         "context": [""]
     },
     {
