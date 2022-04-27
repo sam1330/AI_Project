@@ -1,3 +1,6 @@
 # Chatbot integration using Python and telegram
 
-### this is a Project of Artificial intelligence to show how telegram and python work together with a Web environment 
+### This is a Project of Artificial intelligence asked by the professor os AI in UTESA
+### This project uses Python, consuming the telegram bot API. is connected to a MySQL database to retrieve user and products info
+
+### This Bot is Like an e-commerce bot. you can ask for product, track your order, ask for commerce info and more.

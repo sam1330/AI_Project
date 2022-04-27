@@ -12,9 +12,9 @@
         "hey"
       ],
       "responses": [
-        "Hola ¿en que te puedo ayudar?",
-        "Saludos, que necesitas?",
-        "Hola, En que puedo servirle?"
+        "Hola!! \nBienvenido a IA Seller.\n en que te puedo ayudar?",
+        "Saludos. \nBienvenido a IA Seller.\n En que puedo servirle?",
+        "\nBienvenido a IA Seller. Espero se encuentre bien.\nQue puedo hacer por usted?"
       ]
     },
     {
@@ -54,18 +54,22 @@
       ],
       "responses": [
         "Estamos abiertos de lunes a viernes de 9:00 a 6:00",
-        "Cerrado los domingos y festivos",
-        "la hora de apertura es 9 am y la hora de cierre es 6 pm"
+        "la hora de apertura es 9 am y la hora de cierre es 6 pm de Lunes a Viernes.\n Cerrados los Dias festivos"
       ]
     },{
       "tag": "noanswer",
         "patterns": [],
-        "responses": ["Esto es lo que puedo hacer por usted:\n 1-Consultar productos\n 2-Estado es un pedido\n 3-Sugerir producto"],
+        "responses": ["A traves de este chat, unicamente puedo hacer por usted lo siguiente:\n\n 1-Consultar productos\n 2-Estado es un pedido\n 3-Sugerir producto", "Este chat solo esta autorizado a responder algunas preguntas sobre la tienda, la posibilidad de comprar productos y ver Status de su orden."],
         "context": [""]
     }, {
       "tag": "inventory",
         "patterns": ["necesito un producto", "tienen disponible?", "cuanto cuesta?", "consultar producto", "consultar un producto", "producto", "productos"],
         "responses": ["Cual producto desea", "Nombre del producto?"],
+        "context": [""]
+    }, {
+      "tag": "orders",
+        "patterns": ["estado de un pedido", "pedido", "orden", "necesito informacion de una orden", "una orden", "un pedido"],
+        "responses": ["Por supuesto.\nEscriba el ID del pedido que se le facilito al completar su compra o puede revisar en su Email", "Necesitare el ID del pedido \n(puede consultarlo en su correo electronico)", "Voy a necesitar que me facilite el numero de orden"],
         "context": [""]
     },
     {

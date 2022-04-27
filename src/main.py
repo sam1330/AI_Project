@@ -11,7 +11,7 @@ from telegram.ext import (
 
 # Define Options
 CHOOSING, CLASS_STATE, PAY_STATE, CHECKOUT, \
-    INVENTORY, ADD_PRODUCTS, SHOW_STOCKS, LOCATION = range(8)
+    INVENTORY, ADD_PRODUCTS, SHOW_STOCKS, LOCATION, STATE_REQUEST = range(9)
 
 
 from telegram.ext import *
@@ -47,7 +47,6 @@ def handle_message(update, context: CallbackContext) -> int:
     chat_id = update.message.chat.id
     user_message = update.message.text
     user_message = tokenize(user_message)
-    # print(update)
         
     X = bag_of_words(user_message, all_words)
     X = X.reshape(1, X.shape[0])
@@ -64,11 +63,15 @@ def handle_message(update, context: CallbackContext) -> int:
         # ya se mas o menos lo que hare, pues implementare respuestas personalizadas para las preguntas abiertas y para preguntas relacionadas con el inventario voy a hacer procesos para responder de manera certera.
         for intent in intents['intents']:
             if tag == intent["tag"]:
-                if tag == "inventory":
+                if tag == "inventory" or tag == "orders":
+                    if tag == "orders":
+                        bot.send_message(chat_id=chat_id, text=random.choice(intent['responses']))
+                        return STATE_REQUEST
+                    
                     bot.send_message(chat_id=chat_id, text="Para acceder a los productos escriba tu nombre, email y telefono en ese orden y separado por comas (,)")
-                    # handlers.handleMesages(update, context)
+
                     return INVENTORY
-                    # DBRequests = DBRequests(1, 1)
+
                 bot.send_message(chat_id=chat_id, text=random.choice(intent['responses']))
     else:
         for intent in intents['intents']:
@@ -108,17 +111,8 @@ model.eval()
 updater = Updater(keys.BOT_API_KEY, use_context=True)
 dp = updater.dispatcher
 
+#Esta funcion es la principal. el punto de entrada del bot. asi se setean los comandos y los mensajes y sus respectivos handlers
 def main():
-
-    # dp.add_handler(CommandHandler("start", start_command))
-    # dp.add_handler(CommandHandler("help", help_command))
-    # dp.add_handler(CommandHandler("productos", products_command))
-    # dp.add_handler(CommandHandler("exit", exit_command))
-    
-
-    # dp.add_handler(MessageHandler(Filters.text, handle_message))
-
-    # dp.add_error_handler(errors)
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', handlers.start_command)],
         states={
@@ -136,7 +130,7 @@ def main():
                 CallbackQueryHandler(handlers.classer)
             ],
             handlers.SHOW_STOCKS: [
-                CallbackQueryHandler(handlers.showProduct)
+                CallbackQueryHandler(handlers.showProducts)
             ],
             handlers.ADD_PRODUCTS: [
                 CallbackQueryHandler(handlers.addProductToCart)
@@ -148,8 +142,10 @@ def main():
                 CallbackQueryHandler(handlers.pay)
             ],
             handlers.LOCATION: [
-                MessageHandler(Filters.location, handlers.location)
-                # CallbackQueryHandler(handlers.checkOut)
+                MessageHandler(Filters.all, handlers.location)
+            ],
+            handlers.STATE_REQUEST: [
+                MessageHandler(Filters.all, handlers.stateRequest)
             ],
         },
         fallbacks=[CommandHandler('cancel', handlers.cancel)],
