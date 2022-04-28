@@ -1,6 +1,6 @@
 import mysql.connector
 
-import Constans as keys
+import Constants as keys
 
 # Esta es la clase que utilizamos para conectarnos a la base de datos. 
 class Connector:

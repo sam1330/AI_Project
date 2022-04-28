@@ -1,4 +1,4 @@
-src/Constans.py
+src/Constants.py
 src/database/__pycache__/*
 */__pycache__/*
 .env

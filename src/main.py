@@ -23,7 +23,7 @@ from model import NeuralNet
 from nltk_utils import bag_of_words, tokenize
 
 from DBRequests import *
-import Constans as keys
+import Constants as keys
 import Responses as Resp
 import handlers
 

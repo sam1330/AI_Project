@@ -1,6 +1,6 @@
 import smtplib
 
-import Constans as keys
+import Constants as keys
 
 
 class Mail:
