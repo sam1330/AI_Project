@@ -35,13 +35,15 @@
       "tag": "thanking",
       "patterns": [
         "gracias",
-        "gracias por informacion"
+        "gracias por informacion",
+        "gracias por ayudarme",
+        "perfecto",
+        "le agradezco"
       ],
       "responses": [
-        "De nada",
-        "De nada, gracias",
-        "un gusto",
-        "un placer"
+        "De nada, espero este satisfecho con nuestros servicios",
+        "Un placer haberle sido de ayuda",
+        "Un gusto haberle ayudado"
       ]
     },
     {

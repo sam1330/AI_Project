@@ -13,6 +13,7 @@ from telegram.ext import (
 from geopy import distance
 
 from DBRequests import *
+import Mail
 
 # Variables de estado
 CART = [] 
@@ -277,10 +278,15 @@ def pay(update, context):
         for product in CART:
             db.completePurchase(purchase_num, product, context.user_data["user-id"], TOTAL, "cash", 'procesado')
 
+
+        message = f"Por pagar en efectivo se le aplica un 10% de descuento.\nEl TOTAL de la orden es: {TOTAL} \nGracias por su compra!\n\n si desea consultar su orden. el numero de la misma es: *{purchase_num}*\n\n Att. IA Seller"
+        mailInstance = Mail.Mail(context.user_data['user-data'][0][2], "Factura de compra", message)
+        mailInstance.sendMail()
+
         CART = [] 
         TOTAL = 0
         CLIENT_LOCATION = ()
-        return ConversationHandler.END
+        return CHOOSING
     elif data == "card":
 
         bot.send_message(
@@ -291,10 +297,14 @@ def pay(update, context):
         for product in CART:
             db.completePurchase(purchase_num, product, context.user_data["user-id"], TOTAL, "card", 'procesado')
 
+        message = f"\nEl TOTAL de la orden es: {TOTAL} \nGracias por su compra!\n\n si desea consultar su orden. el numero de la misma es: *{purchase_num}*\n\n Att. IA Seller"
+        mailInstance = Mail.Mail(context.user_data['user-data'][0][2], "Factura de compra", message)
+        mailInstance.sendMail()
+
         CART = [] 
         TOTAL = 0
         CLIENT_LOCATION = ()
-        return ConversationHandler.END
+        return CHOOSING
     
     return PAY_STATE
 

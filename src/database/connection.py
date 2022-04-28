@@ -1,12 +1,15 @@
 import mysql.connector
+
+import Constans as keys
+
 # Esta es la clase que utilizamos para conectarnos a la base de datos. 
 class Connector:
     def __init__(self):
         self.connection = mysql.connector.connect(
-            host="localhost",
-            user="root",
-            passwd="",
-            database="ai_db"
+            host=keys.DB_HOST,
+            user=keys.DB_USER,
+            passwd=keys.DB_PASSWORD,
+            database=keys.DB_NAME
         )
         self.cursor = self.connection.cursor(buffered=True)
 
